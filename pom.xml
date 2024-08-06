@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--
+    Em vez de repetir essas configurações em cada projeto individualmente,
+    o Maven oferece a possibilidade de herdar essas configurações de um projeto "pai".
+    O elemento <parent> é usado para estabelecer essa relação de herança entre os projetos.
+    Geralmente é fornecido pela biblioteca Hibernate-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
+        <relativePath/>
+    </parent>
+    <groupId>com.programming.medicine</groupId>
+    <artifactId>microservice-parents</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>medicamentos</module>
+        <module>laboratorios</module>
+        <module>userConfig</module>
+        <module>empresa</module>
+        <module>discovery-service</module>
+        <module>gateway</module>
+        <module>notifcation-service</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <!--Responsável por empacotar o SpringBoot em arquivo JAR executável + as suas dependências.-->
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- Plugin do compilador Maven -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <!--Ele é usado para configurar as opções de compilação do Java,
+                como a versão do Java a ser usada, as opções do compilador e assim por diante. -->
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version> <!-- ou a versão mais recente -->
+                <configuration>
+                    <source>1.8</source> <!-- ou sua versão de Java -->
+                    <target>1.8</target> <!-- ou sua versão de Java -->
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
